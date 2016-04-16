@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <script rel="script" src="../js/jquery-2.1.4.min.js"></script>
+    <script rel="script" src="index.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="login">
+        <div id="title">登录 以发表失物信息</div>
+        <form method="post" onsubmit="return send()">
+            <p>学号</p>
+            <input class="text" id="username" name="username" type="text" placeholder="请输入学号">
+            <p>密码</p>
+            <input class="text" id="password" name="password" type="password" placeholder="默认为身份证号">
+            <p id="error">账号密码错误</p>
+            </br>
+            </br>
+            <input id="submit" value="登录" type="submit">
+        </form>
+    </div>
+</body>
+</html>

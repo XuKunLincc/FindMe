@@ -1,0 +1,124 @@
+body{
+   font-family: 微软雅黑;
+}
+.content {
+  margin-top: 100px;
+  background-color: #f5f5f5;
+  width: 600px;
+  border-radius: 30px;
+  p{
+    color: #888888;
+  }
+}
+
+h2{
+  font-weight: bolder;
+  //color: red;
+}
+.overlay {
+  width: 400px;
+  position: relative;
+  margin: 10px auto;
+  cursor: pointer;
+  p {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 33px;
+    text-align: center;
+    background-color: #cccccc;
+    color: white;
+    padding-top: 5px;
+    border-radius: 5px;
+  }
+  input {
+    padding-left: 115px;
+  }
+}
+
+textarea{
+  padding-top: 30px;
+  width: 100%;
+  height: 0px;
+  background-color: #00aeef;
+  resize: none;
+  font-size: large;
+  font-weight: 600;
+}
+@imgHeight: 200px;
+@imgLeft: -50px;
+.picList{
+  list-style: none;
+  border-top: 2px dashed #cccccc;
+  padding-top: 10px;
+  width: 400px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  li{
+    float: left;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    border: 2px dashed #cccccc;
+    text-align: center;
+    padding: 0px;
+    cursor: pointer;
+    color: #cccccc;
+    margin-right: 20px;
+    overflow: hidden;
+  }
+  #addPic{
+    width: 100px;
+    height: 100px;
+  }
+  #addPic:hover{
+    color: black;
+    background-color: #eeeeee;
+  }
+  img{
+    border-radius: 20px;
+    height: @imgHeight;
+    margin-top: @imgLeft;
+  }
+}
+
+.info{
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  margin: 0px 15px 15px 15px;
+  border-radius: 20px;
+  #type{
+    color: #ff3a44;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.pic{
+  position: relative;
+  display: none;
+  p{
+    position: absolute;
+    display: none;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    background-color: green;
+    color: white;
+    filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
+    -moz-opacity:0.5; /*Firefox私有，透明度50%*/
+    opacity:0.5;/*其他，透明度50%*/
+  }
+  button{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 58, 68, 0.8);
+    color: white;
+  }
+}
