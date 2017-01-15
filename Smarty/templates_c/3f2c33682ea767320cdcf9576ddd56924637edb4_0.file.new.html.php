@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2016-03-28 16:31:59
+<?php /* Smarty version 3.1.27, created on 2016-05-03 16:22:07
          compiled from "F:\web\www\Smarty\templates\Home\new.html" */ ?>
 <?php
-/*%%SmartyHeaderCode:259156f8ebff5037e8_79147477%%*/
+/*%%SmartyHeaderCode:1111857285faf045e25_37589334%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3f2c33682ea767320cdcf9576ddd56924637edb4' => 
     array (
       0 => 'F:\\web\\www\\Smarty\\templates\\Home\\new.html',
-      1 => 1459153912,
+      1 => 1461598679,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '259156f8ebff5037e8_79147477',
+  'nocache_hash' => '1111857285faf045e25_37589334',
   'variables' => 
   array (
     'unlogin' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_56f8ebff53b793_39096786',
+  'unifunc' => 'content_57285faf55faa9_62333205',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_56f8ebff53b793_39096786')) {
-function content_56f8ebff53b793_39096786 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_57285faf55faa9_62333205')) {
+function content_57285faf55faa9_62333205 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '259156f8ebff5037e8_79147477';
+$_smarty_tpl->properties['nocache_hash'] = '1111857285faf045e25_37589334';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,30 +55,30 @@ $_smarty_tpl->properties['nocache_hash'] = '259156f8ebff5037e8_79147477';
 <nav class=" navbar navbar-fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><span style="font-size: large">失物招领</span></a>
-        <ul class="nav navbar-nav navbar-left">
-            <li><a href="index.php">首页</a></li>
-            <li><a href="">卡类</a></li>
-            <li><a href="">钥匙</a></li>
-            <li><a href="">贵重物品</a></li>
-            <li><a href="">其他</a></li>
-        </ul>
+        <!--<ul class="nav navbar-nav navbar-left">-->
+            <!--<li><a href="index.php">首页</a></li>-->
+            <!--<li><a href="">卡类</a></li>-->
+            <!--<li><a href="">钥匙</a></li>-->
+            <!--<li><a href="">贵重物品</a></li>-->
+            <!--<li><a href="">其他</a></li>-->
+        <!--</ul>-->
         <div class="user">
-            <ul class="nav navbar-nav navbar-right <?php echo $_smarty_tpl->tpl_vars['unlogin']->value;?>
+            <ul class="nav navbar-nav <?php echo $_smarty_tpl->tpl_vars['unlogin']->value;?>
 ">
                 <li><a href="../Login/index.html">登录</a></li>
-                <li><a href="../Login/index.html">关于</a></li>
+                <li><a href="../Home/about.html">关于</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right <?php echo $_smarty_tpl->tpl_vars['logined']->value;?>
+            <ul class="nav navbar-nav <?php echo $_smarty_tpl->tpl_vars['logined']->value;?>
 ">
                 <li class="logined"><a href="../Login/index.html"><?php echo $_smarty_tpl->tpl_vars['userName']->value;?>
 </a>
                     <ul id="user-info">
                         <li><a href="">个人中心</a></li>
                         <li><a href="">账号设置</a></li>
-                        <li><a href="">退出</a></li>
+                        <li><a href="../Login/validate.php?status=unlogin">退出</a></li>
                     </ul>
                 </li>
-                <li><a href="../Login/index.html">关于</a></li>
+                <li><a href="../Home/about.html">关于</a></li>
             </ul>
         </div>
     </div>
@@ -129,10 +129,10 @@ $_smarty_tpl->properties['nocache_hash'] = '259156f8ebff5037e8_79147477';
             <li class="pic"><img><p>上传成功</p><button class="btn">删除</button></li>
             <li ><button id="addPic" onclick="file.click()" class="btn btn-default">添加图片</button></li>
         </ul>
-        <input type="file" id="file" style="display: none" onchange="addPicList(this)">
+        <input type="file" id="file" onclick="changeStatus()" style="display: none" onchange="addPicList(this)">
         <p class="container" style="width: 400px">
             <button class="btn btn-success" id="submit" style="float: right; width: 100px; margin-left: 10px">发布</button>
-            <button class="btn btn-default" id="cancel" style="float: right; width: 100px">取消</button>
+            <button class="btn btn-default" onclick="cancle()" style="float: right; width: 100px">取消</button>
         </p>
     </div>
     <p style="float: right">广东东软学院安全服务队</p>

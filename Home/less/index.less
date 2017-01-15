@@ -1,3 +1,7 @@
+* {
+  font-family: "Microsoft YaHei";
+}
+
 nav {
   background-color: #00aeef;
   a {
@@ -6,6 +10,10 @@ nav {
   .navbar-nav a:hover {
     background-color: #00aeef;
   }
+}
+
+.navbar-nav {
+  float: right;
 }
 
 .search {
@@ -36,7 +44,7 @@ nav {
   display: block;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
@@ -54,26 +62,33 @@ nav {
 }
 
 body {
-  .list{
+  .list {
     margin-top: 30px;
-    a:hover{
-      text-decoration:none;
+    a:hover {
+      text-decoration: none;
     }
   }
   .thumbnail {
     cursor: pointer;
+    border-radius: 10px;
+    h3 {
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
     .my-img {
-      height: 260px;
-      width: 320px;
+      height: 400px;
+      width: 95%;
+      margin: 0 auto;
+      border-radius: 10px;
     }
   }
 }
 
-.overflow-hidden{
+.overflow-hidden {
   overflow: hidden;
 }
 
-footer{
+footer {
   margin-top: 30px;
   text-align: center;
   width: 100%;
@@ -84,7 +99,7 @@ footer{
   padding-top: 80px;
 }
 
-#new{
+#new {
   background-color: #00aeef;
   border: 0px;
   border-top-left-radius: 0;
@@ -92,9 +107,25 @@ footer{
   width: 300px;
   height: 45px;
   font-size: large;
-  //transition:background 2s;
 }
 
-//#new:hover{
-//  background-color: #99cc00;
-//}
+@max-width: 767px;
+
+@media screen and (max-width: @max-width) {
+
+  .list {
+    width: @max-width;
+  }
+
+  nav {
+    width: @max-width;
+  }
+
+  body {
+    width: @max-width;
+  }
+
+  header {
+    width: @max-width;
+  }
+}

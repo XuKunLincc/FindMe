@@ -15,6 +15,8 @@ var localBl;
 var htimeBl;
 var phoneNumBl;
 
+var fileStatus = true;  // 用于标记是否是返回回来的 避免文件重复上传
+
 var picList;
 $(document).ready(init);
 function init() {
@@ -144,6 +146,8 @@ function submit() {
 var fileList = new Array;
 function addPicList(ele) {
     //get image url
+    if(fileStatus)
+        return;
     var mFile = ele.files[0];
     var imgUrl;
     var li = $(".pic").eq(0).clone();
@@ -165,9 +169,6 @@ function addPicList(ele) {
     console.log(li.attr("class"));
     li.mouseenter(showOrHiddenDelButton)
     li.mouseleave(showOrHiddenDelButton)
-    //li.mousedown(function(){
-    //    alert("test")
-    //})
     li.appendTo(picList);
     li.show();
     sendPic("saveFile.php",mFile,li);
@@ -203,3 +204,12 @@ function onunload_handler(){
     alert(warning);
 }
 
+// cancle
+function cancle(){
+    window.location.href = "cancle.php"
+}
+
+
+function changeStatus(){
+    fileStatus =  false;
+}

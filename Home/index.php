@@ -8,7 +8,7 @@
 
 require_once '../Smarty/configs/config.php';
 require_once '../phpInclude/pic.class.php';
-require_once '../phpInclude/lostSql.class.php';
+require_once '../phpInclude/lost.class.php';
 session_start();
 
 $picDb = new Ckl_pic();
@@ -37,13 +37,24 @@ if(isset($_GET['pageIndex'])){
     $pageIndex = 1;
 }
 
-$lostList = $lostDb->getPageByIndex($pageIndex);
-foreach($lostList as $key => $row){
-    $lostInfoList[$key]["htime"] = $row['htime'];
-    $lostInfoList[$key]["local"] = $row['local'];
-    $lostInfoList[$key]['id'] = $row['_id'];
-    $lostInfoList[$key]['title'] = $row['title'];
-    $lostInfoList[$key]['pic'] = "../LostPic/".$picDb->getPicListById($row['picsId'])[0];
+if(isset($_POST['search'])){
+    $lostList = $lostDb->getSearchResByIndex($_POST['search'],1);
+}
+else
+    $lostList = $lostDb->getPageByIndex($pageIndex);
+$lostInfoList = null;
+
+if(count($lostList) != 0){
+    foreach($lostList as $key => $row){
+        $lostInfoList[$key]["htime"] = $row['htime'];
+        $lostInfoList[$key]["local"] = $row['local'];
+        $lostInfoList[$key]['id'] = $row['_id'];
+        $lostInfoList[$key]['title'] = $row['title'];
+        $lostInfoList[$key]['pic'] = "../LostPic/".$picDb->getPicListById($row['picsId'])[0];
+    }
+    $picNoStatus = "none";
+}else{
+    $picNoStatus = "block";
 }
 
 $smarty->assign('unlogin',$unlogin);
@@ -52,5 +63,6 @@ $smarty->assign('userName',$userName);
 $smarty->assign('pageIndex',$pageIndex);
 $smarty->assign('allPageIndex',$allPageIndex);
 $smarty->assign('lostInfoList',$lostInfoList);
+$smarty->assign('picNoStatus',$picNoStatus);
 $smarty->display('Home/index.html');
 ?>

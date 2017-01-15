@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +10,18 @@
     <title></title>
 </head>
 <body>
+
+<?php
+    if(isset($_GET['from'])){
+        $url = $_GET['from'];
+    }else{
+        $url = "../index.html";
+    }
+?>
+
     <div id="login">
         <div id="title">登录 以发表失物信息</div>
-        <form method="post" onsubmit="return send()">
+        <form method="post" onsubmit="return send('<?php echo $url;?>')">
             <p>学号</p>
             <input class="text" id="username" name="username" type="text" placeholder="请输入学号">
             <p>密码</p>
@@ -18,7 +29,7 @@
             <p id="error">账号密码错误</p>
             </br>
             </br>
-            <input id="submit" value="登录" type="submit">
+            <input id="submit" value="登录" class="hoverColor" type="submit">
         </form>
     </div>
 </body>

@@ -138,5 +138,9 @@ class Ckl_user extends Ckl_Base
 	function getNumBy($key, $value){
 		return $this->mysql->queryByKey("num",$key,$value);
 	}
+
+	function getPermissionsByNum($num){
+		return $this->getOneRow($this->mysql->queryByKey("permissions","num",$num));
+	}
 }
 ?>

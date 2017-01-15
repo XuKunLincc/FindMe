@@ -6,7 +6,7 @@ var top;
 $(document).ready(init);
 
 function init(){
-    img = $(".about");;
+    img = $(".about");
     img.mouseenter(function () {
         $(this).children("p.description").stop(true);
         $(this).children("p.description").slideDown("normal");
@@ -18,6 +18,9 @@ function init(){
 
     $(window).scroll(istop);
     $("#top").click(gotop);
+}
+function deleteInfo(){
+
 }
 
 function istop(){
@@ -36,21 +39,40 @@ function gotop(){
 
 function hiddenPhoneNum(){
     $(".phoneNum").toggle();
+    $("#showNum").hide();
 }
 
 function showPhoneNum(){
-    $(".phoneNum").toggle();
-    $("#showNum").slideToggle();
-    $("#error").hide();
-    $("#showPhoneNum").hide();
+    if(!isLogin()){
+        alert("尚未登录，请先登录")
+        window.location.href = "../../Login/index.html?from=../Home/info.php?id="+getLostId();
+    }else{
+        $(".phoneNum").toggle();
+        $("#showNum").slideToggle();
+        $("#error").hide();
+        $("#showPhoneNum").hide();
+    }
 }
 
 //验证是否登录
 function isLogin(){
-
+    var flag = true;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("get","islogin.php",false);
+    xmlHttp.onload = function(e){
+        if(xmlHttp.responseText == "true")
+            flag = true;
+        else
+            flag = false;
+    }
+    xmlHttp.send();
+    return flag;
 }
 
+
 function postNum(){
+    if(isNull($("#num").val()))
+        return;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("post","yanzheng.php",true);
     xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -63,7 +85,13 @@ function postNum(){
             showOne("error");
         }
     }
-    xmlHttp.send("num="+$("#num").val());
+    xmlHttp.send("num="+$("#num").val()+"&lostId="+getLostId());
+}
+
+function getLostId(){
+    var reg = /[^\?id\=]+/
+    var lostId = window.location.search.substr(0).match(reg);
+    return lostId;
 }
 
 function showOne(id){
@@ -77,4 +105,12 @@ function showOne(id){
 
 function myXmlHttp(){
     this.xmlHttp = new XMLHttpRequest();
+}
+
+function isNull(str){
+    if(str == ""){
+        alert("输入不能为空")
+        return true;
+    }else
+        return false;
 }

@@ -55,6 +55,14 @@ CKL;
         return $reques;
     }
 
+    // 倒序查询
+    function queryAllFLimit($from, $limit)
+    {
+        $e = "SELECT * from $this->tableName ORDER BY _id DESC  limit $from, $limit";
+        $reques = $this->db->query($e) or die("错误");
+        return $reques;
+    }
+
 
     //查第from至limit个信息
     function queryLimit($from, $limit)
@@ -170,6 +178,34 @@ CKL;
         }
         echo $e;
         return $this->db->exec($e) or die("update error");
+    }
+
+    function searchByKey($key, $value){
+        $e = "SELECT * FROM $this->tableName WHERE $key LIKE :value ";
+        $query = $this->db->prepare($e);
+        $query->bindValue(":value","%".$value."%");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function searchByKeyS($array){
+        $e = "SELECT * FROM $this->tableName WHERE";
+
+        foreach($array as $key=> $value){
+            $e = $e." $key LIKE ? OR";
+        }
+
+        $e = substr($e, 0, -2);
+        $query = $this->db->prepare($e);
+
+        $i = 1;
+        foreach($array as $value){
+            $query->bindValue($i,"%".$value."%");
+            $i++;
+        }
+
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function getLastId(){

@@ -63,3 +63,48 @@ function noChange(){
     },1000)
 }
 
+function nextPage(index,maxIndex){
+    if(index >= maxIndex)
+        return false;
+    return true;
+}
+
+function previousPage(index){
+    if(index <= 1)
+        return false;
+    return true;
+}
+
+function newLost(){
+    if(isLogin()){
+        window.location.href = "new.php"
+    }else{
+        alert("尚未登录，请先登录");
+        window.location.href = "../Login/index.html?from=../index.html"
+    }
+}
+
+//��֤�Ƿ��¼
+function isLogin(){
+    var flag = true;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("get","islogin.php",false);
+    xmlHttp.onload = function(e){
+        if(xmlHttp.responseText == "true")
+            flag = true;
+        else
+            flag = false;
+    }
+    xmlHttp.send();
+    return flag;
+}
+
+
+function isLastOrFirst(index,maxIndex){
+    if(index <= 1){
+        $(".previous").children("a").removeAttr('href');
+    }
+    if(index >= maxIndex){
+        $(".next").children("a").removeAttr('href');
+    }
+}

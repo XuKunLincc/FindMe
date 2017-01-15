@@ -7,7 +7,7 @@
  */
 require_once '../Smarty/configs/config.php';
 require_once '../phpInclude/pic.class.php';
-require_once '../phpInclude/lostSql.class.php';
+require_once '../phpInclude/lost.class.php';
 
 session_start();
 if (isset($_SESSION['STATE']) && $_SESSION["STATE"] == "neusoftss") {
@@ -18,6 +18,7 @@ if (isset($_SESSION['STATE']) && $_SESSION["STATE"] == "neusoftss") {
     $unlogin = "show";
     $logined = "hidden";
     $userName = '未登录';
+    header("Location: index.php");
 }
 if (isset($_POST['info'])) {
     add();

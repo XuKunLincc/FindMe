@@ -20,8 +20,8 @@ function init() {
     }
 }
 
-function send() {
-
+function send(url) {
+    URL = url;
     xmlhttp.open("POST", "validate.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     //xmlhttp.send("username=" + username.value + "&password=" + password.value);
@@ -51,5 +51,5 @@ function hideError() {
 }
 
 function go() {
-    window.location.href = "../Home/index.php";
+    window.location.href = URL;
 }

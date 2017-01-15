@@ -7,11 +7,16 @@
  */
 require_once '../Smarty/configs/config.php';
 require_once '../phpInclude/pic.class.php';
-require_once '../phpInclude/lostSql.class.php';
+require_once '../phpInclude/lost.class.php';
 
 session_start();
 $picDb = new Ckl_pic();
 $lostDb = new Ckl_lost();
+
+if(!isset($_GET['id'])){
+    header("Location: index.php");
+    exit;
+}
 
 if(isset($_SESSION['STATE']) && $_SESSION["STATE"] == "neusoftss"){
     $unlogin = "hidden";
@@ -23,10 +28,16 @@ if(isset($_SESSION['STATE']) && $_SESSION["STATE"] == "neusoftss"){
     $userName = "未登录";
 }
 
-if(!isset($_GET['id'])){
-    header("Location: index.php");
-    exit;
+if(isset($_SESSION['PERMISSIONS'])){
+    $permissions = $_SESSION;
+    if($permissions)
+        $permissions = "block";
+    else
+        $permissions = "None";
 }
+else
+    $permissions = "None";
+
 
 $picsId = $lostDb->getPicIdById($_GET['id']);
 
@@ -40,7 +51,6 @@ $time = $lostDb->getByPDOStm($lostPdoStm,'time');
 $state = $lostDb->getStateById($_GET['id']);
 $info = $lostDb->getInfoById($_GET['id']);
 $title = $lostDb->getTitleById($_GET['id']);
-
 
 switch($state){
     case 1:
@@ -66,4 +76,5 @@ $smarty->assign('time',$time);
 $smarty->assign('state',$stateShow);
 $smarty->assign('info',$info);
 $smarty->assign('title',$title);
+$smarty->assign('permissions',$permissions);
 $smarty->display("Home/info.html");

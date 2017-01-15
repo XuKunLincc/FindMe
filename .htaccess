@@ -1,0 +1,3 @@
+ErrorDocument 404 /building/index.html
+RewriteEngine on
+RewriteRule ([0-9]{1,})\.html /Home/info.php?id=$1

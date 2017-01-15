@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Youku视频地址解析</title>
+    <script rel="script" src="../js/jquery-2.1.4.min.js"></script>
+</head>
+<script>
+    $(document).ready(getYouKuUrl);
+    var jsonData = '<?php echo $jsonData;?>'
+    var sid, token, part = 00, fileId, K, W;
+    var   h = [19, 1, 4, 7, 30, 14, 28, 8, 24, 17, 6, 35, 34, 16, 9, 10, 13, 22, 32, 29, 31, 21, 18, 3, 2, 23, 25, 27, 11, 20, 5, 15, 12, 0, 33, 26]
+
+    function getYouKuUrl(){
+index = 0;
+jsonObj = JSON.parse(jsonData);
+mdata = jsonObj.data;
+dataStrem = mdata.stream;
+
+for(i = 0; i < dataStrem.length; i++){
+if(dataStrem[i].stream_type == "3gphd"){
+index = i;
+break
+}
+}
+u = a(s("b4et" + "o0b" + "4", h).toString(), o(mdata.security.encrypt_string)).split("_");
+
+console.log("tset__a_" +  r(a(s("boa4" + "poz" + "1", h).toString(), "846781310759612f0cfd6" + "_" + "0310200100577CFDEC619132F5AAF21309699A-D48C-F65B-351A-6EB1E3B92421" + "_" + 3371)));
+
+ip = mdata.security.ip
+sid = u[0];
+token = u[1];
+fileId = getFileId(dataStrem[index].stream_fileid,0)
+K = dataStrem[index].segs[0].key;
+W = dataStrem[index].segs[0].total_milliseconds_video / 1e3
+C = encodeURIComponent(r(a(s("boa4" + "poz" + "1", h).toString(), sid + "_" + fileId + "_" + token)));
+//       // C = (r(a(s("boa4" + "poz" + "1", h).toString(), "846781310759612f0cfd6" + "_" + "0310200100577CFDEC619132F5AAF21309699A-D48C-F65B-351A-6EB1E3B92421" + "_" + 3371)));
+//        console.log(C)
+//        console.log(sid)
+//        console.log(token)
+//        console.log(fileId)
+url = 'http://k.youku.com/player/getFlvPath/sid/'+sid+"_"+"00"+"/st/"+"mp4"+"/fileid/"+fileId+"?K="+K+"&hd=1"+ "&myp=0&ts="+W+"&ypp=0"+"&ymovie=1"+"&ep="+C+"&ctype=12"+"&ev=1"+"&token="+token+"&oip="+ip;
+//document.write("<p>"+url+"</p>")
+console.log(url)
+}
+
+
+function getFileId(e, t) {
+if (null == e || "" == e) return "";
+var n = "",
+i = e.slice(0, 8),
+o = t.toString(16);
+1 == o.length && (o = "0" + o),
+o = o.toUpperCase();
+
+var r = e.slice(10, e.length);
+return n = i + o + r
+}
+
+
+function r(e) {
+if (!e) return "";
+e = e.toString();
+var t, n, i, o, r, a, s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+for (i = e.length, n = 0, t = ""; i > n;) {
+if (o = 255 & e.charCodeAt(n++), n == i) {
+t += s.charAt(o >> 2),
+t += s.charAt((3 & o) << 4),
+t += "==";
+break
+}
+if (r = e.charCodeAt(n++), n == i) {
+t += s.charAt(o >> 2),
+t += s.charAt((3 & o) << 4 | (240 & r) >> 4),
+t += s.charAt((15 & r) << 2),
+t += "=";
+break
+}
+a = e.charCodeAt(n++),
+t += s.charAt(o >> 2),
+t += s.charAt((3 & o) << 4 | (240 & r) >> 4),
+t += s.charAt((15 & r) << 2 | (192 & a) >> 6),
+t += s.charAt(63 & a)
+}
+return t
+}
+
+function o(e) {
+if (!e) return "";
+e = e.toString();
+var t, n, i, o, r, a, s, l = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);
+for (a = e.length, r = 0, s = ""; a > r;) {
+do t = l[255 & e.charCodeAt(r++)];
+while (a > r && -1 == t);
+if (-1 == t) break;
+do n = l[255 & e.charCodeAt(r++)];
+while (a > r && -1 == n);
+if (-1 == n) break;
+s += String.fromCharCode(t << 2 | (48 & n) >> 4);
+do {
+if (i = 255 & e.charCodeAt(r++), 61 == i) return s;
+i = l[i]
+} while (a > r && -1 == i);
+if (-1 == i) break;
+s += String.fromCharCode((15 & n) << 4 | (60 & i) >> 2);
+do {
+if (o = 255 & e.charCodeAt(r++), 61 == o) return s;
+o = l[o]
+} while (a > r && -1 == o);
+if (-1 == o) break;
+s += String.fromCharCode((3 & i) << 6 | o)
+}
+return s
+}
+
+function a(e, t) {
+for (var n, i = [], o = 0, r = "", a = 0; 256 > a; a++) i[a] = a;
+for (a = 0; 256 > a; a++) o = (o + i[a] + e.charCodeAt(a % e.length)) % 256,
+n = i[a],
+i[a] = i[o],
+i[o] = n;
+a = 0,
+o = 0;
+for (var s = 0; s < t.length; s++) a = (a + 1) % 256,
+o = (o + i[a]) % 256,
+n = i[a],
+i[a] = i[o],
+i[o] = n,
+r += String.fromCharCode(t.charCodeAt(s) ^ i[(i[a] + i[o]) % 256]);
+
+return r
+}
+
+function s(e, t) {
+for (var n = [], i = 0; i < e.length; i++) {
+var o = 0;
+o = e[i] >= "a" && e[i] <= "z" ? e[i].charCodeAt(0) - "a".charCodeAt(0) : e[i] - "0" + 26;
+for (var r = 0; 36 > r; r++) if (t[r] == o) {
+o = r;
+break
+}
+n[i] = o > 25 ? o - 26 : String.fromCharCode(o + 97)
+}
+return n.join("")
+}
+
+
+
+
+</script>
+<body>
+</body>
+</html>

@@ -10,7 +10,6 @@
 
 session_start();
 if (!isset($_SESSION['files'])) {
-    echo "set filesId";
     $_SESSION['files'] = "";
 }
 $fileName = md5(date("ymdhis")) . ".png";

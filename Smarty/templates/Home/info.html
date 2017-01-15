@@ -13,27 +13,27 @@
 <nav class=" navbar navbar-fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.php"><span style="font-size: large">失物招领</span></a>
-        <ul class="nav navbar-nav navbar-left">
-            <li><a href="index.php">首页</a></li>
-            <li><a href="">卡类</a></li>
-            <li><a href="">钥匙</a></li>
-            <li><a href="">贵重物品</a></li>
-            <li><a href="">其他</a></li>
-        </ul>
+        <!--<ul class="nav navbar-nav navbar-left">-->
+        <!--<li><a href="index.php">首页</a></li>-->
+        <!--<li><a href="">卡类</a></li>-->
+        <!--<li><a href="">钥匙</a></li>-->
+        <!--<li><a href="">贵重物品</a></li>-->
+        <!--<li><a href="">其他</a></li>-->
+        <!--</ul>-->
         <div class="user">
             <ul class="nav navbar-nav navbar-right {$unlogin}">
                 <li><a href="../Login/index.html">登录</a></li>
-                <li><a href="../Login/index.html">关于</a></li>
+                <li><a href="../Home/about.html">关于</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right {$logined}">
                 <li class="logined"><a href="../Login/index.html">{$userName}</a>
                     <ul id="user-info">
                         <li><a href="">个人中心</a></li>
                         <li><a href="">账号设置</a></li>
-                        <li><a href="">退出</a></li>
+                        <li><a href="../Login/validate.php?status=unlogin">退出</a></li>
                     </ul>
                 </li>
-                <li><a href="../Login/index.html">关于</a></li>
+                <li><a href="../Home/about.html">关于</a></li>
             </ul>
         </div>
     </div>
@@ -43,9 +43,7 @@
     <h2>{$title}</h2>
 
     <p><span>发布时间：{$time} &nbsp;&nbsp;</span>状态：<span style="color: green; font-weight: bolder">{$state}</span></p>
-    <!--<p class="info-p">丢失时间：2015-20-8</p>-->
-    <!--<p class="info-p" style="background-color: #50de2d">丢失地点：2015-20-8</p>-->
-    <!--<p class="info-p" style="background-color: #ff5b8b">关键信息：44142319960***314</p>-->
+
     <p style="width:60%; margin: 10px auto; color: black; text-align: start;">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$info}
     </p>
@@ -53,15 +51,14 @@
         {foreach from=$picList item=info}
         <li class="about"><img src="{$info['pic']}">
 
-            <p class="text-nowrap overflow-hidden description">{$info['art']}</p></li>
-        {/foreach}
+            {/foreach}
     </ul>
     <div class="function" style="float: right">
         <ul>
             <li><a id="top" style="background-color: #de5aff; cursor: pointer">TOP</a></li>
-            <li><a href="">删除</a></li>
-            <li onclick="showPhoneNum()" style="cursor: pointer""><a style="background-color: #50de2d">联系方式</a></li>
-            <li><a href="" style="background-color: #ff5b8b">举报</a></li>
+            <li onclick="deleteInfo()" style="cursor: pointer; display: {$permissions}"><a>删除</a></li>
+            <li onclick="showPhoneNum()" style="cursor: pointer"><a style="background-color: #50de2d">联系方式</a></li>
+            <!--<li><a href="" style="background-color: #ff5b8b">举报</a></li>-->
         </ul>
     </div>
 </div>
